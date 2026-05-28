@@ -1,5 +1,304 @@
-<!doctype html>
-<meta charset="utf-8">
-<title>自己紹介</title>
-<h1>自己紹介</h1>
-<p>授業で作成したページです。</p>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学生紹介ポートフォリオ</title>
+    <style>
+        /* 🎨 カラーパレットと基本設定 */
+        :root {
+            --bg-color: #f3f4f6;
+            --text-color: #1f2937;
+            --primary-color: #2563eb;
+            --primary-hover: #1d4ed8;
+            --card-bg: #ffffff;
+            --border-color: #e5e7eb;
+            --text-muted: #4b5563;
+        }
+
+        /* ダークモード対応 */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #111827;
+                --text-color: #f9fafb;
+                --primary-color: #3b82f6;
+                --primary-hover: #60a5fa;
+                --card-bg: #1f2937;
+                --border-color: #374151;
+                --text-muted: #9ca3af;
+            }
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            padding-top: 60px; /* ヘッダーの高さ分 */
+        }
+
+        /* 🌐 ナビゲーションバー */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 1.5rem;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* 📦 メインレイアウト */
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        section {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        h2 {
+            font-size: 1.4rem;
+            margin-bottom: 1.2rem;
+            border-left: 4px solid var(--primary-color);
+            padding-left: 0.7rem;
+        }
+
+        h3 {
+            font-size: 1.15rem;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ⚡ 学んでいることリスト */
+        .interests-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .interests-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .interests-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        /* 🛠️ 成果物セクション */
+        .works-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .work-item {
+            border-top: 1px solid var(--border-color);
+            padding-top: 1.5rem;
+        }
+
+        .work-item:first-child {
+            border-top: none;
+            padding-top: 0;
+        }
+
+        .tag {
+            display: inline-block;
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-right: 0.4rem;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        /* 🔒 連絡先セクション（限定公開用スタイル） */
+        .contact-note {
+            background-color: var(--bg-color);
+            border: 1px dashed var(--border-color);
+            padding: 1rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+
+        /* 👣 フッター */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        /* 📱 スマートフォン向け調整 (ブレークポイント) */
+        @media (max-width: 600px) {
+            body {
+                padding-top: 50px;
+            }
+            .nav-container {
+                padding: 0.6rem 1rem;
+            }
+            .nav-links {
+                gap: 0.8rem;
+            }
+            .nav-links a {
+                font-size: 0.85rem;
+            }
+            section {
+                padding: 1.2rem;
+                margin-bottom: 1.2rem;
+            }
+            h1 { font-size: 1.5rem; }
+            h2 { font-size: 1.25rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="nav-container">
+            <a href="#" class="logo">My Portfolio</a>
+            <ul class="nav-links">
+                <li><a href="#about">関心分野</a></li>
+                <li><a href="#works">成果物</a></li>
+                
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        
+        <section id="hero">
+            <h1>私のポートフォリオサイト</h1>
+            <p>大学の講義における取り組みや、個人の学習成果を記録している静的Webサイトです。スマートフォン表示にも完全対応しています。</p>
+        </section>
+
+        <section id="about">
+            <h2>関心分野・学んでいること</h2>
+            <p>現在はソフトウェアとハードウェアの両方を学習し、実際に実験で動作を確認したりしています。以下の分野を特に学んでいます。</p>
+            <ul class="interests-list">
+                <li>
+                    <strong>組込みシステム：</strong><br>
+                    ハードのものをソフトで動かす仕組みなどを学んでいます。
+                </li>
+                <li>
+                    <strong>画像処理：</strong><br>
+                    画像データから対象物を取り出す仕組みや技術を学んでいます。
+                </li>
+                <li>
+                    <strong>統計：</strong><br>
+                    実際の統計の計算を手計算で解くだけでなくAIを駆使しながら適切な計算方法や手段を学んでいます。
+                </li>
+            </ul>
+        </section>
+
+        <section id="works">
+            <h2>授業での成果物・プロジェクト</h2>
+            <div class="works-container">
+                
+                <div class="work-item">
+                    <h3>1. タイタニック号データを用いた生存予測モデル</h3>
+                    <div>
+                        <span class="tag">Python</span>
+                        <span class="tag">pandas</span>
+                        <span class="tag">ロジスティック回帰</span>
+                    </div>
+                    <p><strong>概要：</strong> 講義のデータ分析演習にて作成。乗客の属性データ（客室クラス、性別、年齢など）の前処理を行い、欠損値の補完やダミー変数化を施した上で機械学習モデルを構築しました。</p>
+                    <p><strong>工夫点：</strong> 正解率（約80%）の数値だけに満足せず、混同行列や分類レポートを用いて「生存者の見落とし（再現率の低さ）」というモデルの弱点まで分析・考察を行いました。</p>
+                </div>
+
+                <div class="work-item">
+                    <h3>2. 金融商品をテーマにしたUMLクラス図の作成</h3>
+                    <div>
+                        <span class="tag">UML</span>
+                        <span class="tag">クラス図</span>
+                        <span class="tag">Mermaid</span>
+                    </div>
+                    <p><strong>概要：</strong> オブジェクト指向設計の演習にて作成。「銘柄」という抽象的な親クラスから、「債券」と「株式」という具体的な子クラスへプロパティが引き継がれる構造をモデリングしました。</p>
+                    <p><strong>工夫点：</strong> 共通属性（銘柄コード、名称）を親クラスに集約し、子クラス固有の属性（利率、売買単位など）と切り離すことで、汎化（継承）の概念を視覚的に分かりやすく表現しました。</p>
+                </div>
+
+            </div>
+        </section>
+
+
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Student Portfolio. Created for University Coursework.</p>
+    </footer>
+
+</body>
+</html>
